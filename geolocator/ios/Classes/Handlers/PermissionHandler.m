@@ -45,6 +45,11 @@
     self.errorHandler = errorHandler;
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
+    if (@available(iOS 9.0, *)) {
+        self.locationManager.allowsBackgroundLocationUpdates = YES;
+    } else {
+        // Fallback on earlier versions
+    }
     
     if ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"] != nil) {
         [self.locationManager requestWhenInUseAuthorization];
